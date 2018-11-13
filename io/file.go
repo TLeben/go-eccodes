@@ -4,8 +4,8 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/amsokol/go-eccodes/debug"
-	"github.com/amsokol/go-eccodes/native"
+	"github.com/zachaller/go-eccodes/debug"
+	"github.com/zachaller/go-eccodes/native"
 )
 
 type File interface {

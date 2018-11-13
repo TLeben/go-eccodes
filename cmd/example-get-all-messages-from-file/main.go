@@ -9,8 +9,8 @@ import (
 
 	"github.com/amsokol/go-errors"
 
-	"github.com/amsokol/go-eccodes"
-	cio "github.com/amsokol/go-eccodes/io"
+	"github.com/zachaller/go-eccodes"
+	cio "github.com/zachaller/go-eccodes/io"
 )
 
 func main() {

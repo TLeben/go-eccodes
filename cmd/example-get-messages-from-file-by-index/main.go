@@ -10,7 +10,7 @@ import (
 
 	"github.com/amsokol/go-errors"
 
-	"github.com/amsokol/go-eccodes"
+	"github.com/zachaller/go-eccodes"
 )
 
 func main() {
