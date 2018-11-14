@@ -23,7 +23,7 @@ func Ccodes_get_long(handle Ccodes_handle, key string) (int64, error) {
 	cValue := (*C.long)(unsafe.Pointer(&value))
 	err := C.codes_get_long((*C.codes_handle)(handle), cKey, cValue)
 	if err != 0 {
-		return 0, errors.New(Cgrib_get_error_message(int(err)))
+		return 0, errors.Error(Cgrib_get_error_message(int(err)))
 	}
 
 	return int64(value), nil
@@ -35,7 +35,7 @@ func Ccodes_set_long(handle Ccodes_handle, key string, value int64) error {
 
 	err := C.codes_set_long((*C.codes_handle)(handle), cKey, C.long(Clong(value)))
 	if err != 0 {
-		return errors.New(Cgrib_get_error_message(int(err)))
+		return errors.Error(Cgrib_get_error_message(int(err)))
 	}
 
 	return nil
@@ -49,7 +49,7 @@ func Ccodes_get_double(handle Ccodes_handle, key string) (float64, error) {
 	cValue := (*C.double)(unsafe.Pointer(&value))
 	err := C.codes_get_double((*C.codes_handle)(handle), cKey, cValue)
 	if err != 0 {
-		return 0, errors.New(Cgrib_get_error_message(int(err)))
+		return 0, errors.Error(Cgrib_get_error_message(int(err)))
 	}
 
 	return float64(value), nil
@@ -61,7 +61,7 @@ func Ccodes_set_double(handle Ccodes_handle, key string, value float64) error {
 
 	err := C.codes_set_double((*C.codes_handle)(handle), cKey, C.double(Cdouble(value)))
 	if err != 0 {
-		return errors.New(Cgrib_get_error_message(int(err)))
+		return errors.Error(Cgrib_get_error_message(int(err)))
 	}
 
 	return nil
@@ -76,7 +76,7 @@ func Ccodes_get_string(handle Ccodes_handle, key string) (string, error) {
 
 	err := C.codes_get_length((*C.codes_handle)(handle), cKey, cLength)
 	if err != 0 {
-		return "", errors.New(Cgrib_get_error_message(int(err)))
+		return "", errors.Error(Cgrib_get_error_message(int(err)))
 	}
 	// +1 byte for '\0'
 	length++
@@ -96,7 +96,7 @@ func Ccodes_get_string(handle Ccodes_handle, key string) (string, error) {
 	cBytes = (*C.char)(unsafe.Pointer(&result[0]))
 	err = C.codes_get_string((*C.codes_handle)(handle), cKey, cBytes, cLength)
 	if err != 0 {
-		return "", errors.New(Cgrib_get_error_message(int(err)))
+		return "", errors.Error(Cgrib_get_error_message(int(err)))
 	}
 
 	if length == 0 {
@@ -123,7 +123,7 @@ func Ccodes_grib_get_data(handle Ccodes_handle) (latitudes []float64, longitudes
 
 	res := C.codes_grib_get_data((*C.codes_handle)(handle), cLatitudes, cLongitudes, cValues)
 	if res != 0 {
-		return nil, nil, nil, errors.New(Cgrib_get_error_message(int(res)))
+		return nil, nil, nil, errors.Error(Cgrib_get_error_message(int(res)))
 	}
 
 	return latitudes, longitudes, values, nil
@@ -150,7 +150,7 @@ func Ccodes_grib_get_data_unsafe(handle Ccodes_handle) (latitudes unsafe.Pointer
 		Cfree(latitudes)
 		Cfree(longitudes)
 		Cfree(values)
-		return nil, nil, nil, errors.New(Cgrib_get_error_message(int(res)))
+		return nil, nil, nil, errors.Error(Cgrib_get_error_message(int(res)))
 	}
 
 	return latitudes, longitudes, values, nil

@@ -21,7 +21,7 @@ func Ccodes_handle_new_from_index(index Ccodes_index) (Ccodes_handle, error) {
 		if err == Cint(C.CODES_END_OF_INDEX) {
 			return nil, io.EOF
 		}
-		return nil, errors.New(Cgrib_get_error_message(int(err)))
+		return nil, errors.Error(Cgrib_get_error_message(int(err)))
 	}
 	return unsafe.Pointer(h), nil
 }
@@ -36,7 +36,7 @@ func Ccodes_handle_new_from_file(ctx Ccodes_context, file CFILE, product int) (C
 
 	h := C.codes_handle_new_from_file((*C.grib_context)(ctx), (*C.FILE)(file), C.ProductKind(cProduct), cError)
 	if err != 0 {
-		return nil, errors.New(Cgrib_get_error_message(int(err)))
+		return nil, errors.Error(Cgrib_get_error_message(int(err)))
 	}
 
 	if h == nil {
@@ -49,7 +49,7 @@ func Ccodes_handle_new_from_file(ctx Ccodes_context, file CFILE, product int) (C
 func Ccodes_handle_delete(handle Ccodes_handle) error {
 	err := C.codes_handle_delete((*C.codes_handle)(handle))
 	if err != 0 {
-		return errors.New(Cgrib_get_error_message(int(err)))
+		return errors.Error(Cgrib_get_error_message(int(err)))
 	}
 	return nil
 }

@@ -32,7 +32,7 @@ func Ccodes_keys_iterator_get_name(kiter Ccodes_keys_iterator) string {
 func Ccodes_keys_iterator_delete(kiter Ccodes_keys_iterator) error {
 	err := C.codes_keys_iterator_delete((*C.codes_keys_iterator)(kiter))
 	if err != 0 {
-		return errors.New(Cgrib_get_error_message(int(err)))
+		return errors.Error(Cgrib_get_error_message(int(err)))
 	}
 	return nil
 }

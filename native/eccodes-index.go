@@ -22,7 +22,7 @@ func Ccodes_index_new_from_file(ctx Ccodes_context, filename string, keys string
 	cError := (*C.int)(unsafe.Pointer(&err))
 	idx := C.codes_index_new_from_file((*C.codes_context)(ctx), cFilename, cKeys, cError)
 	if err != 0 {
-		return nil, errors.New(Cgrib_get_error_message(int(err)))
+		return nil, errors.Error(Cgrib_get_error_message(int(err)))
 	}
 	return unsafe.Pointer(idx), nil
 }
@@ -35,7 +35,7 @@ func Ccodes_index_new(ctx Ccodes_context, keys string) (Ccodes_index, error) {
 	cError := (*C.int)(unsafe.Pointer(&err))
 	idx := C.codes_index_new((*C.codes_context)(ctx), cKeys, cError)
 	if idx == nil {
-		return nil, errors.New(Cgrib_get_error_message(int(err)))
+		return nil, errors.Error(Cgrib_get_error_message(int(err)))
 	}
 	return unsafe.Pointer(idx), nil
 }
@@ -46,7 +46,7 @@ func Ccodes_index_select_double(index Ccodes_index, key string, value float64) e
 
 	err := C.codes_index_select_double((*C.codes_index)(index), cKey, C.double(Cdouble(value)))
 	if err != 0 {
-		return errors.New(Cgrib_get_error_message(int(err)))
+		return errors.Error(Cgrib_get_error_message(int(err)))
 	}
 	return nil
 }
@@ -57,7 +57,7 @@ func Ccodes_index_select_long(index Ccodes_index, key string, value int64) error
 
 	err := C.codes_index_select_long((*C.codes_index)(index), cKey, C.long(Clong(value)))
 	if err != 0 {
-		return errors.New(Cgrib_get_error_message(int(err)))
+		return errors.Error(Cgrib_get_error_message(int(err)))
 	}
 	return nil
 }
@@ -71,7 +71,7 @@ func Ccodes_index_select_string(index Ccodes_index, key string, value string) er
 
 	err := C.codes_index_select_string((*C.codes_index)(index), cKey, cValue)
 	if err != 0 {
-		return errors.New(Cgrib_get_error_message(int(err)))
+		return errors.Error(Cgrib_get_error_message(int(err)))
 	}
 	return nil
 }
