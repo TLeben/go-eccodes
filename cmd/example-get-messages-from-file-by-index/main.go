@@ -8,7 +8,7 @@ import (
 	"time"
 	"unsafe"
 
-	"github.com/amsokol/go-errors"
+	"github.com/zachaller/go-errors"
 
 	"github.com/zachaller/go-eccodes"
 )
