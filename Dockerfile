@@ -12,4 +12,6 @@ RUN curl -fsSL "$GOLANG_DOWNLOAD_URL" -o golang.tar.gz \
     && echo "$GOLANG_DOWNLOAD_SHA256  golang.tar.gz" | sha256sum -c - \
 	&& tar -C /usr/local -xzf golang.tar.gz \
 	&& rm golang.tar.gz
-ENV PATH /usr/local/go/bin:$PATH
+ENV PATH /root/go/bin:/usr/local/go/bin:$PATH
+WORKDIR /root
+
