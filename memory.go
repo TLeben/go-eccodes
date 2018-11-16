@@ -2,7 +2,6 @@ package codes
 
 import (
 	"io"
-	"runtime"
 
 	"github.com/zachaller/go-errors"
 
@@ -11,34 +10,35 @@ import (
 	"github.com/zachaller/go-eccodes/native"
 )
 
-type ReaderFile interface {
+type ReaderMemory interface {
 	Next() (Message, error)
 }
 
-type WriterFile interface {
+type WriterMemory interface {
 }
 
-type File interface {
-	ReaderFile
-	WriterFile
+type Memory interface {
+	ReaderMemory
+	WriterMemory
 	Close()
 }
 
-type file struct {
-	file cio.File
+type memory struct {
+	memory cio.Memory
 }
 
-type fileIndexed struct {
+type memoryIndexed struct {
 	index native.Ccodes_index
 }
 
-var emptyFilter = map[string]interface{}{}
+//var memoryFilter = map[string]interface{}{}
 
-func OpenFile(f cio.File) (File, error) {
-	return &file{file: f}, nil
+func OpenMemory(m cio.Memory) (Memory, error) {
+	return &memory{memory: m}, nil
 }
 
-func OpenFileByPathWithFilter(path string, filter map[string]interface{}) (File, error) {
+/*
+func OpenMemoryByPathWithFilter(path string, filter map[string]interface{}) (Memory, error) {
 	if filter == nil {
 		filter = emptyFilter
 	}
@@ -108,9 +108,10 @@ func OpenFileByPathWithFilter(path string, filter map[string]interface{}) (File,
 
 	return file, nil
 }
+*/
 
-func (f *file) Next() (Message, error) {
-	handle, err := native.Ccodes_handle_new_from_file(native.DefaultContext, f.file.Native(), native.ProductAny)
+func (m *memory) Next() (Message, error) {
+	handle, err := native.Ccodes_handle_new_from_message_copy(native.DefaultContext, m.memory.Native(), m.memory.GetSize())
 	if err != nil {
 		if err == io.EOF {
 			return nil, err
@@ -121,16 +122,16 @@ func (f *file) Next() (Message, error) {
 	return newMessage(handle), nil
 }
 
-func (f *file) Close() {
-	f.file = nil
+func (m *memory) Close() {
+	m.memory = nil
 }
 
-func (f *fileIndexed) isOpen() bool {
-	return f.index != nil
+func (m *memoryIndexed) isOpen() bool {
+	return m.index != nil
 }
 
-func (f *fileIndexed) Next() (Message, error) {
-	handle, err := native.Ccodes_handle_new_from_index(f.index)
+func (m *memoryIndexed) Next() (Message, error) {
+	handle, err := native.Ccodes_handle_new_from_index(m.index)
 	if err != nil {
 		if err == io.EOF {
 			return nil, err
@@ -141,14 +142,14 @@ func (f *fileIndexed) Next() (Message, error) {
 	return newMessage(handle), nil
 }
 
-func (f *fileIndexed) Close() {
+func (f *memoryIndexed) Close() {
 	if f.isOpen() {
 		defer func() { f.index = nil }()
 		native.Ccodes_index_delete(f.index)
 	}
 }
 
-func fileIndexedFinalizer(f *fileIndexed) {
+func memoryIndexedFinalizer(f *fileIndexed) {
 	if f.isOpen() {
 		debug.MemoryLeakLogger.Print("file is not closed")
 		f.Close()

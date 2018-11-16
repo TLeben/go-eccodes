@@ -33,3 +33,8 @@ func Cfclose(file CFILE) error {
 	}
 	return nil
 }
+
+func Cmclose(memory Cbytes) error {
+	Cfree(memory)
+	return nil
+}
