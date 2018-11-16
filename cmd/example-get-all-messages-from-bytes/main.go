@@ -29,15 +29,11 @@ func main() {
 	if err != nil {
 		log.Fatalf("failed to open file on file system: %s", err.Error())
 	}
-	defer m.Close()
 
 	memory, err := codes.OpenMemory(m)
 	if err != nil {
 		log.Fatalf("failed to open file: %s", err.Error())
 	}
-	defer memory.Close()
-
-	//native.Ccodes_handle_new_from_message_copy(native.DefaultContext, content)
 
 	start := time.Now()
 
@@ -45,7 +41,6 @@ func main() {
 	if err != nil {
 		log.Println(err)
 	}
-	defer msg.Close()
 
 	log.Printf("============= BEGIN MESSAGE N%d ==========\n", 1)
 
@@ -70,6 +65,11 @@ func main() {
 
 	log.Printf("elapsed=%.0f ms", time.Since(start).Seconds()*1000)
 	log.Printf("============= END MESSAGE N%d ============\n\n", 1)
+
+	//Close to keep memory from leaking
+	m.Close()
+	memory.Close()
+	msg.Close()
 
 	debug.FreeOSMemory()
 }

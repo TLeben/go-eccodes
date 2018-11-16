@@ -3,7 +3,6 @@ package codes
 import (
 	"github.com/zachaller/go-errors"
 
-	"github.com/zachaller/go-eccodes/debug"
 	cio "github.com/zachaller/go-eccodes/io"
 	"github.com/zachaller/go-eccodes/native"
 )
@@ -39,11 +38,4 @@ func (m *memory) GetSingleMessage() (Message, error) {
 
 func (m *memory) Close() {
 	m.memory = nil
-}
-
-func memoryIndexedFinalizer(f *fileIndexed) {
-	if f.isOpen() {
-		debug.MemoryLeakLogger.Print("file is not closed")
-		f.Close()
-	}
 }

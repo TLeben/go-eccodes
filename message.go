@@ -4,8 +4,8 @@ import (
 	"math"
 	"runtime"
 
-        "github.com/zachaller/go-eccodes/debug"
-        "github.com/zachaller/go-eccodes/native"
+	"github.com/zachaller/go-eccodes/debug"
+	"github.com/zachaller/go-eccodes/native"
 )
 
 type Message interface {

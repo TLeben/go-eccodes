@@ -16,7 +16,7 @@ type File interface {
 
 type file struct {
 	debugID string
-	file     native.CFILE
+	file    native.CFILE
 }
 
 func OpenFile(path string, mode string) (File, error) {
