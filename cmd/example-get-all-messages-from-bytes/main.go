@@ -3,7 +3,6 @@ package main
 import (
 	"flag"
 	"fmt"
-	"io"
 	"io/ioutil"
 	"log"
 	"runtime/debug"
@@ -40,51 +39,37 @@ func main() {
 
 	//native.Ccodes_handle_new_from_message_copy(native.DefaultContext, content)
 
-	n := 0
-	for {
-		err = process(memory, n)
-		if err != nil {
-			if err == io.EOF {
-				break
-			}
-			log.Fatalf("failed to get message (#%d) from index: %s", n, err.Error())
-		}
-		n++
-	}
-}
-
-func process(memory codes.Memory, n int) error {
 	start := time.Now()
 
-	msg, err := memory.Next()
+	msg, err := memory.GetSingleMessage()
 	if err != nil {
-		return err
+		log.Println(err)
 	}
 	defer msg.Close()
 
-	log.Printf("============= BEGIN MESSAGE N%d ==========\n", n)
+	log.Printf("============= BEGIN MESSAGE N%d ==========\n", 1)
 
 	shortName, err := msg.GetString("shortName")
 	if err != nil {
-		return errors.Wrap(err, "failed to get 'shortName' value")
+		log.Println(errors.Wrap(err, "failed to get 'shortName' value"))
 	}
 	name, err := msg.GetString("name")
 	if err != nil {
-		return errors.Wrap(err, "failed to get 'name' value")
+		log.Println(errors.Wrap(err, "failed to get 'name' value"))
 	}
 
 	log.Printf("Variable = [%s](%s)\n", shortName, name)
 
 	// just to measure timing
-	_, _, _, err = msg.Data()
+	lat, long, value, err := msg.Data()
+
+	fmt.Println(lat[0], long[0], value[0])
 	if err != nil {
-		return errors.Wrap(err, "failed to get data (latitudes, longitudes, values)")
+		log.Println(errors.Wrap(err, "failed to get data (latitudes, longitudes, values)"))
 	}
 
 	log.Printf("elapsed=%.0f ms", time.Since(start).Seconds()*1000)
-	log.Printf("============= END MESSAGE N%d ============\n\n", n)
+	log.Printf("============= END MESSAGE N%d ============\n\n", 1)
 
 	debug.FreeOSMemory()
-
-	return nil
 }

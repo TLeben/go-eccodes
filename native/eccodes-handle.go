@@ -48,6 +48,17 @@ func Ccodes_handle_new_from_file(ctx Ccodes_context, file CFILE, product int) (C
 
 func Ccodes_handle_new_from_message_copy(ctx Ccodes_context, data Cbytes, size Clong) (Ccodes_handle, error) {
 	h := C.codes_handle_new_from_message_copy((*C.grib_context)(ctx), data, C.ulong(size))
+
+	//	Csize := C.ulong(size)
+
+	//	var err Cint
+	//	cError := (*C.int)(unsafe.Pointer(&err))
+	//	h := C.codes_grib_handle_new_from_multi_message((*C.grib_context)(ctx), &data, &Csize, cError)
+
+	//	if err != 0 {
+	//		return nil, errors.Error(Cgrib_get_error_message(int(err)))
+	//	}
+
 	if h == nil {
 		return nil, io.EOF
 	}
