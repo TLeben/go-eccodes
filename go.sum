@@ -1,6 +1,2 @@
-github.com/amsokol/go-eccodes v0.0.0-20180202125156-488806cbd8c6 h1:Zt93bxo7Xn6pbjcXToSYWpFZ5EcvBzSOJGlrO3YaVx0=
-github.com/amsokol/go-eccodes v0.0.0-20180202125156-488806cbd8c6/go.mod h1:rzpFek3/3TiDia5T0bqaIc89ur/JdfPj1QncR5comk4=
-github.com/amsokol/go-errors v2.0.3+incompatible h1:QbmBHeWj0q7Iyfooc+u9An1ZeYe7mwR5W4eQXReIVNk=
-github.com/amsokol/go-errors v2.0.3+incompatible/go.mod h1:qIXF05lwS6DpzJFTdD+z7Sxzgn4Ci2gobSJSGS/sauc=
 github.com/zachaller/go-errors v2.0.3+incompatible h1:dungXIIxbNTQl2bwG2ZffLGLZw8kfbZzwCvfPMibPeM=
 github.com/zachaller/go-errors v2.0.3+incompatible/go.mod h1:MGk8rcg/sUFw/T+OmtchRtVIGKKHTeS8OWldEGGN22s=
