@@ -9,7 +9,7 @@ import (
 	"io"
 	"unsafe"
 
-	"github.com/zachaller/go-errors"
+	"github.com/zachaller/go-errors/v2"
 )
 
 func Ccodes_handle_new_from_index(index Ccodes_index) (Ccodes_handle, error) {

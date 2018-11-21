@@ -1,7 +1,7 @@
 package codes
 
 import (
-	"github.com/zachaller/go-errors"
+	"github.com/zachaller/go-errors/v2"
 
 	cio "github.com/zachaller/go-eccodes/io"
 	"github.com/zachaller/go-eccodes/native"

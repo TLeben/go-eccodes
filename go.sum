@@ -1,3 +1,2 @@
-github.com/zachaller/go-errors v2.0.3+incompatible h1:dungXIIxbNTQl2bwG2ZffLGLZw8kfbZzwCvfPMibPeM=
-github.com/zachaller/go-errors v2.0.3+incompatible/go.mod h1:MGk8rcg/sUFw/T+OmtchRtVIGKKHTeS8OWldEGGN22s=
+github.com/zachaller/go-errors/v2 v2.0.5 h1:qgrbfzXgzRaDsCFBIt2tjMtmPpL+dgQ404YjsCCZDBY=
 github.com/zachaller/go-errors/v2 v2.0.5/go.mod h1:Zn+ebWic3rmrcXCROCLL+RFbS0v/uC1F+GZpgLHIeYs=
