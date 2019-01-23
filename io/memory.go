@@ -42,7 +42,7 @@ func (m *memory) GetSize() native.Clong {
 
 func (m *memory) Close() error {
 	defer func() { m.memory = nil }()
-	native.Cfree(m.Native())
+	native.Cmclose(m.Native())
 	return nil
 }
 

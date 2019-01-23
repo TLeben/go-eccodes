@@ -24,6 +24,10 @@ type memory struct {
 	memory cio.Memory
 }
 
+func (m *memory) isOpen() bool {
+	return m.memory != nil
+}
+
 func OpenMemory(m cio.Memory) (Memory, error) {
 	return &memory{memory: m}, nil
 }
@@ -37,5 +41,8 @@ func (m *memory) GetSingleMessage() (Message, error) {
 }
 
 func (m *memory) Close() {
-	m.memory = nil
+	if m.isOpen() {
+		defer func() { m.memory = nil }()
+		native.Ccodes_handle_delete(m.memory.Native())
+	}
 }
