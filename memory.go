@@ -41,8 +41,5 @@ func (m *memory) GetSingleMessage() (Message, error) {
 }
 
 func (m *memory) Close() {
-	if m.isOpen() {
-		defer func() { m.memory = nil }()
-		native.Ccodes_handle_delete(m.memory.Native())
-	}
+	m.memory = nil
 }
