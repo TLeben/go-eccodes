@@ -33,7 +33,7 @@ func OpenMemory(m cio.Memory) (Memory, error) {
 }
 
 func (m *memory) GetSingleMessage() (Message, error) {
-	handle, err := native.Ccodes_handle_new_from_message_copy(native.DefaultContext, m.memory.Native(), m.memory.GetSize())
+	handle, err := native.Ccodes_handle_new_from_message(native.DefaultContext, m.memory.Native(), m.memory.GetSize())
 	if err != nil {
 		return nil, errors.Wrap(err, "failed create new handle from file")
 	}

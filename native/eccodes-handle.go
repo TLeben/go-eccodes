@@ -46,8 +46,8 @@ func Ccodes_handle_new_from_file(ctx Ccodes_context, file CFILE, product int) (C
 	return unsafe.Pointer(h), nil
 }
 
-func Ccodes_handle_new_from_message_copy(ctx Ccodes_context, data Cbytes, size Clong) (Ccodes_handle, error) {
-	h := C.codes_handle_new_from_message_copy((*C.grib_context)(ctx), data, C.ulong(size))
+func Ccodes_handle_new_from_message(ctx Ccodes_context, data Cbytes, size Clong) (Ccodes_handle, error) {
+	h := C.codes_handle_new_from_message((*C.grib_context)(ctx), data, C.ulong(size))
 
 	//	Csize := C.ulong(size)
 
