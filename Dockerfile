@@ -13,18 +13,21 @@ RUN curl -fsSL "$GOLANG_DOWNLOAD_URL" -o golang.tar.gz \
 	&& tar -C /usr/local -xzf golang.tar.gz \
 	&& rm golang.tar.gz
 ENV PATH /root/go/bin:/usr/local/go/bin:$PATH
-#COPY . /root/go-eccodes
 
 WORKDIR /root
-RUN curl -L "https://confluence.ecmwf.int/download/attachments/45757960/eccodes-2.10.0-Source.tar.gz?api=v2" --output 2.10.tar.gz
-RUN tar -xzvf 2.10.tar.gz
+RUN curl -L "https://confluence.ecmwf.int/download/attachments/45757960/eccodes-2.10.0-Source.tar.gz?api=v2" --output eccodes.tar.gz
+RUN tar -xzvf eccodes.tar.gz
 RUN mkdir /root/build
 WORKDIR /root/build
-RUN cmake -DENABLE_PNG=on -DENABLE_JPG=on -DENABLE_AEC=on  -DENABLE_ECCODES_THREADS=on -DENABLE_MEMFS=on -DBUILD_SHARED_LIBS=both -DENABLE_FORTRAN=off -DCMAKE_INSTALL_PREFIX=/usr/local ../eccodes-2.10.0-Source/
+RUN cmake -DENABLE_GRIB_TIMER=on -DENABLE_ALIGN_MEMORY=on -DENABLE_INSTALL_ECCODES_DEFINITIONS=on -DENABLE_PNG=on -DENABLE_JPG=on -DENABLE_AEC=on  -DENABLE_ECCODES_THREADS=on -DENABLE_MEMFS=on -DBUILD_SHARED_LIBS=both -DENABLE_FORTRAN=off -DCMAKE_INSTALL_PREFIX=/usr/local ../eccodes-2.10.0-Source/
+RUN make -j4
+RUN ctest -j8
 RUN make install
 RUN ln -s /usr/local/lib/libeccodes.so /usr/lib/libeccodes.so
 RUN ln -s /usr/local/lib/libeccodes_memfs.so /usr/lib/libeccodes_memfs.so
-RUN rm -rf /var/lib/apt/lists/* /root/2.10.tar.gz
+RUN ln -s /usr/local/lib/libeccodes.a /usr/lib/libeccodes.a
+RUN ln -s /usr/local/lib/libeccodes_memfs.a /usr/lib/libeccodes_memfs.a
+RUN rm -rf /var/lib/apt/lists/* /root/eccodes.tar.gz
 WORKDIR /home/dusr/code
 
 
