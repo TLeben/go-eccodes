@@ -29,5 +29,3 @@ RUN ln -s /usr/local/lib/libeccodes.a /usr/lib/libeccodes.a
 RUN ln -s /usr/local/lib/libeccodes_memfs.a /usr/lib/libeccodes_memfs.a
 RUN rm -rf /var/lib/apt/lists/* /root/eccodes.tar.gz
 WORKDIR /home/dusr/code
-
-
