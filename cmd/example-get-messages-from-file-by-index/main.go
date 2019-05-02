@@ -8,9 +8,9 @@ import (
 	"time"
 	"unsafe"
 
-	"github.com/zachaller/go-errors/v2"
+	"github.com/tleben/go-errors/v2"
 
-	"github.com/zachaller/go-eccodes"
+	"github.com/tleben/go-eccodes"
 )
 
 func main() {
