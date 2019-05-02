@@ -5,9 +5,9 @@ RUN echo "deb http://us.archive.ubuntu.com/ubuntu/ xenial-security main" | tee -
 RUN apt-get update && \
   apt-get install -y curl build-essential gcc make cmake libtool zlib1g-dev libpng-dev libaec-dev libjpeg-dev curl git libopenjp2-7-dev libjasper-dev python
 
-ENV GOLANG_VERSION 1.11.4
+ENV GOLANG_VERSION 1.12.4
 ENV GOLANG_DOWNLOAD_URL https://golang.org/dl/go$GOLANG_VERSION.linux-amd64.tar.gz
-ENV GOLANG_DOWNLOAD_SHA256 fb26c30e6a04ad937bbc657a1b5bba92f80096af1e8ee6da6430c045a8db3a5b
+ENV GOLANG_DOWNLOAD_SHA256 d7d1f1f88ddfe55840712dc1747f37a790cbcaa448f6c9cf51bbe10aa65442f5
 RUN curl -fsSL "$GOLANG_DOWNLOAD_URL" -o golang.tar.gz \
     && echo "$GOLANG_DOWNLOAD_SHA256  golang.tar.gz" | sha256sum -c - \
 	&& tar -C /usr/local -xzf golang.tar.gz \

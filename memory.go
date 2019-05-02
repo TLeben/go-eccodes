@@ -1,10 +1,10 @@
 package codes
 
 import (
-	"github.com/zachaller/go-errors/v2"
+	"github.com/tleben/go-errors/v2"
 
-	cio "github.com/zachaller/go-eccodes/io"
-	"github.com/zachaller/go-eccodes/native"
+	cio "github.com/tleben/go-eccodes/io"
+	"github.com/tleben/go-eccodes/native"
 )
 
 type ReaderMemory interface {
@@ -41,5 +41,6 @@ func (m *memory) GetSingleMessage() (Message, error) {
 }
 
 func (m *memory) Close() {
-	m.memory = nil
+	//m.memory = nil
+    m.memory.Close()
 }

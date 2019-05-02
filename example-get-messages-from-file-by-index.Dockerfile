@@ -1,6 +1,6 @@
-FROM zachaller/go-eccodes:latest
+FROM go-eccodes:latest
 
-RUN go get github.com/zachaller/go-eccodes/cmd/example-get-messages-from-file-by-index
+RUN go get github.com/tleben/go-eccodes/cmd/example-get-messages-from-file-by-index
 
 ADD ./test-data/ARPEGE_0.1_SP1_00H12H_201709290000.grib2 data.grib2
 

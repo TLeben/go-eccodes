@@ -4,11 +4,11 @@ import (
 	"io"
 	"runtime"
 
-	"github.com/zachaller/go-errors/v2"
+	"github.com/tleben/go-errors/v2"
 
-	"github.com/zachaller/go-eccodes/debug"
-	cio "github.com/zachaller/go-eccodes/io"
-	"github.com/zachaller/go-eccodes/native"
+	"github.com/tleben/go-eccodes/debug"
+	cio "github.com/tleben/go-eccodes/io"
+	"github.com/tleben/go-eccodes/native"
 )
 
 type ReaderFile interface {

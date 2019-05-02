@@ -1,3 +1,3 @@
-module github.com/zachaller/go-eccodes
+module github.com/tleben/go-eccodes
 
-require github.com/zachaller/go-errors/v2 v2.0.5
+require github.com/tleben/go-errors/v2 v2.0.5
