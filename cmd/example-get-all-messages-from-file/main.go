@@ -7,10 +7,10 @@ import (
 	"runtime/debug"
 	"time"
 
-	"github.com/zachaller/go-errors/v2"
+	"github.com/tleben/go-errors/v2"
 
-	"github.com/zachaller/go-eccodes"
-	cio "github.com/zachaller/go-eccodes/io"
+	"github.com/tleben/go-eccodes"
+	cio "github.com/tleben/go-eccodes/io"
 )
 
 func main() {
